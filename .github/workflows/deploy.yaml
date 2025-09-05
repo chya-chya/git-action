@@ -27,10 +27,12 @@ jobs:
           host: ${{ secrets.CODEIT_EC2_HOST }}
           username: ${{ secrets.CODEIT_EC2_USERNAME }}
           key: ${{ secrets.CODEIT_EC2_KEY }}
-          script: 
+          port: 2222
+          script: |
             cd /home/ubuntu/pandamarket-be
             git pull origin main
             npm install --production
+            npm run migrate
             npm run build
             pm2 restart all
         
