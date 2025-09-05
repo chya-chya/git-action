@@ -35,9 +35,9 @@ jobs:
       
       - name: Run Tests
         env: 
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/panda-market
-          PORT=3000
-          JWT_ACCESS_TOKEN_SECRET=your-secret-key
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/panda-market,
+          PORT=3000,
+          JWT_ACCESS_TOKEN_SECRET=your-secret-key,
           JWT_REFRESH_TOKEN_SECRET=your-refresh-secret-key  
         run: npm run test
         
