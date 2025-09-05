@@ -27,7 +27,7 @@ jobs:
           host: ${{ secrets.CODEIT_EC2_HOST }}
           username: ${{ secrets.CODEIT_EC2_USERNAME }}
           key: ${{ secrets.CODEIT_EC2_KEY }}
-          port: 2222
+          port: 22
           script: |
             cd /home/ubuntu/pandamarket-be
             git pull origin main
