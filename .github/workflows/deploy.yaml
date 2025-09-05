@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +27,7 @@ jobs:
           host: ${{ secrets.CODEIT_EC2_HOST }}
           username: ${{ secrets.CODEIT_EC2_USERNAME }}
           key: ${{ secrets.CODEIT_EC2_KEY }}
-          script: |
+          script: 
             cd /home/ubuntu/pandamarket-be
             git pull origin main
             npm install --production
