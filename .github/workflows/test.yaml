@@ -24,6 +24,8 @@ jobs:
         run: npm install
       
       - name: Run Tests
+        env: 
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/panda-market
         run: npm run test
         
       
