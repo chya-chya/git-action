@@ -40,6 +40,35 @@ jobs:
           JWT_ACCESS_TOKEN_SECRET: ${{ secrets.CODEIT_JWT_ACCESS_TOKEN_SECRET }},
           JWT_REFRESH_TOKEN_SECRET: ${{ secrets.CODEIT_JWT_REFRESH_TOKEN_SECRET }}  
         run: npm run test
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Download src
+        uses: actions/checkout@v4
         
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+        
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.CODEIT_EC2_HOST }}
+          username: ${{ secrets.CODEIT_EC2_USERNAME }}
+          key: ${{ secrets.CODEIT_EC2_KEY }}
+          port: 22
+          script: |
+            cd /home/ubuntu/pandamarket-be
+            git pull origin main
+            npm install --production
+            npm run migrate
+            npm run build
+            pm2 restart all
       
 
