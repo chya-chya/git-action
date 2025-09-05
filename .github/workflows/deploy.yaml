@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  needs: test
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     
     steps:
